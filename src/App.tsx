@@ -1,7 +1,9 @@
+import { lazy } from 'react';
 import { createTheme } from '@mui/material';
 import { Global, ThemeProvider } from '@emotion/react';
+import { Toaster } from 'react-hot-toast';
+
 import { GlobalStyles } from './GlobalStyles';
-import { lazy } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { Layout } from './components/Layout';
 
@@ -22,6 +24,7 @@ function App() {
           <Route path="/offices" element={<OfficesPage />} />
         </Route>
       </Routes>
+      <Toaster position="top-right" />
       <Global styles={GlobalStyles} />
     </ThemeProvider>
   );
