@@ -1,6 +1,6 @@
 import { createReducer, isAnyOf } from '@reduxjs/toolkit';
 import { Tracking } from '../../common/enums/trackings/types';
-import { getTrackingDetails } from './actions';
+import { getTrackingDetails, resetTrackingHistory } from './actions';
 import { getTodayDate } from '../../helpers/dateHelpers';
 
 export interface History {
@@ -43,6 +43,12 @@ const reducer = createReducer(initialState, builder => {
           }
         });
       }
+    })
+    .addCase(getTrackingDetails.rejected, state => {
+      state.tracking = null;
+    })
+    .addCase(resetTrackingHistory.fulfilled, state => {
+      state.trackingsHistory = initialState.trackingsHistory;
     })
     .addMatcher(
       isAnyOf(getTrackingDetails.fulfilled, getTrackingDetails.rejected),
