@@ -1,4 +1,4 @@
-import { styled, keyframes } from "@mui/material";
+import { styled, keyframes, css } from '@mui/material';
 
 const rotateAnimation = keyframes`
   from {
@@ -10,23 +10,22 @@ const rotateAnimation = keyframes`
   }
 `;
 
-export const LoaderWrapper = styled("div")`
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+export const LoaderWrapper = styled('div')`
   display: flex;
+  height: 100%;
   flex-grow: 1;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 `;
 
-export const StyledLoader = styled("div")`
-  width: 60px;
-  height: 60px;
-  border: 4px solid var(--color-blue-200);
-  border-top: 4px solid transparent;
-  border-radius: 50%;
-  animation: ${rotateAnimation} 1.2s infinite linear;
-`;
+export const StyledLoader = styled('div')(
+  ({ theme }) => css`
+    width: 60px;
+    height: 60px;
+    border: 4px solid ${theme.palette.primary.main};
+    border-top: 4px solid transparent;
+    border-radius: 50%;
+    animation: ${rotateAnimation} 1.2s infinite linear;
+  `
+);

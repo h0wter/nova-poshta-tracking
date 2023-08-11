@@ -1,7 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit';
+import trackingReducer from './trackings/reducer';
 
 export const store = configureStore({
-  reducer: {}
+  reducer: {
+    tracking: trackingReducer
+  }
 });
 
 export type RootState = ReturnType<typeof store.getState>;

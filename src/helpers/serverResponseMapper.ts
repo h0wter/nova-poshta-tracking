@@ -1,11 +1,12 @@
 import {
   OriginalTrackingResponse,
   Tracking
-} from '../common/types/trackingResponse.types';
+} from '../common/enums/trackings/types';
 
 export const trackingResponseMapper = (
   data: OriginalTrackingResponse
 ): Tracking => ({
+  Number: data.Number,
   CityRecipient: data.CityRecipient,
   CitySender: data.CitySender,
   StatusCode: data.StatusCode,

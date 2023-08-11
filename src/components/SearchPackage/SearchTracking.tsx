@@ -8,10 +8,14 @@ import {
 } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import { StyledInput } from '../common/StyledInput/StyledInput';
-import { getTrackingDetails } from '../../services/api';
-import { Tracking } from '../../common/types/trackingResponse.types';
-import { trackingResponseMapper } from '../../helpers/serverResponseMapper';
-import { Item } from './SearchPackage.styled';
+import { Item } from './SearchTracking.styled';
+import { useAppDispatch, useAppSelector } from '../../hooks/storeHooks';
+import { getTrackingDetails } from '../../store/trackings/actions';
+import {
+  selectIsLoading,
+  selectTrackingDetails
+} from '../../store/trackings/selectors';
+import { Loader } from '../Loader/Loader';
 
 const SEARCH_QUERY_VALIDATION_REGEX = /^(59|20)\d{12}$/;
 const SEARCH_QUERY_TEXT_ERROR =
@@ -20,7 +24,11 @@ const SEARCH_QUERY_TEXT_ERROR =
 export const SearchPackage: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [isSearchQueryError, setIsSearchQueryError] = useState(false);
-  const [trackingDetails, setTrackingDetails] = useState<Tracking | null>(null);
+
+  const dispatch = useAppDispatch();
+
+  const isLoading = useAppSelector(selectIsLoading);
+  const trackingDetails = useAppSelector(selectTrackingDetails);
 
   const handleFormSubmit = useCallback(
     async (e: React.FormEvent) => {
@@ -34,13 +42,12 @@ export const SearchPackage: React.FC = () => {
         return;
       }
       setIsSearchQueryError(false);
-      const response = await getTrackingDetails(searchQuery);
-      const mappedResponse = trackingResponseMapper(response.data.data[0]);
-      setTrackingDetails(mappedResponse);
-      console.log(response);
+      dispatch(getTrackingDetails(searchQuery));
     },
-    [searchQuery]
+    [dispatch, searchQuery]
   );
+
+  if (isLoading) return <Loader />;
 
   return (
     <>
@@ -65,25 +72,30 @@ export const SearchPackage: React.FC = () => {
       </form>
       {trackingDetails && (
         <Paper elevation={16} sx={{ padding: 2, marginTop: 2 }}>
-          <Stack color="white" spacing={2}>
+          <Stack spacing={2}>
             <Item elevation={12}>
-              <Typography variant="button">
+              <Typography variant="button" color="white">
+                Створено: {trackingDetails.DateCreated}.
+              </Typography>
+            </Item>
+            <Item elevation={12}>
+              <Typography variant="button" color="white">
                 Статус: {trackingDetails.Status}.
               </Typography>
             </Item>
             <Item elevation={12}>
-              <Typography variant="button">
+              <Typography variant="button" color="white">
                 Місто відправник: {trackingDetails.CitySender}.
               </Typography>
             </Item>
             <Item elevation={12}>
-              <Typography variant="button">
+              <Typography variant="button" color="white">
                 Місто отримувач: {trackingDetails.CityRecipient}.
               </Typography>
             </Item>
             {trackingDetails.WarehouseRecipient && (
               <Item elevation={12}>
-                <Typography variant="button">
+                <Typography variant="button" color="white">
                   Відділення: {trackingDetails.WarehouseRecipient}.
                 </Typography>
               </Item>
