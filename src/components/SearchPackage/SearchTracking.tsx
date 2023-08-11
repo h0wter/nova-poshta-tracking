@@ -81,37 +81,37 @@ export const SearchPackage: React.FC = () => {
       {trackingDetails && (
         <Paper elevation={16} sx={{ padding: 2, marginTop: 2 }}>
           <Stack spacing={2}>
-            <Item elevation={12} sx={{ display: 'flex', alignItems: 'center' }}>
+            <Item elevation={6} sx={{ display: 'flex', alignItems: 'center' }}>
               <DateRangeIcon sx={{ mr: 1 }} />
-              <Typography variant="button" color="white">
+              <Typography variant="button">
                 Створено: {trackingDetails.DateCreated}.
               </Typography>
             </Item>
-            <Item elevation={12} sx={{ display: 'flex', alignItems: 'center' }}>
+            <Item elevation={6} sx={{ display: 'flex', alignItems: 'center' }}>
               <LocalShippingSharpIcon sx={{ mr: 1 }} />
-              <Typography variant="button" color="white">
+              <Typography variant="button">
                 Статус: {trackingDetails.Status}.
               </Typography>
             </Item>
-            <Item elevation={12} sx={{ display: 'flex', alignItems: 'center' }}>
+            <Item elevation={6} sx={{ display: 'flex', alignItems: 'center' }}>
               <LocationCityIcon sx={{ mr: 1 }} />
-              <Typography variant="button" color="white">
+              <Typography variant="button">
                 Місто відправник: {trackingDetails.CitySender}.
               </Typography>
             </Item>
-            <Item elevation={12} sx={{ display: 'flex', alignItems: 'center' }}>
+            <Item elevation={6} sx={{ display: 'flex', alignItems: 'center' }}>
               <LocationCityIcon sx={{ mr: 1 }} />
-              <Typography variant="button" color="white">
+              <Typography variant="button">
                 Місто отримувач: {trackingDetails.CityRecipient}.
               </Typography>
             </Item>
             {trackingDetails.WarehouseRecipient && (
               <Item
-                elevation={12}
+                elevation={6}
                 sx={{ display: 'flex', alignItems: 'center' }}
               >
                 <PlaceSharpIcon sx={{ mr: 1 }} />
-                <Typography variant="button" color="white">
+                <Typography variant="button">
                   Відділення: {trackingDetails.WarehouseRecipient}.
                 </Typography>
               </Item>
