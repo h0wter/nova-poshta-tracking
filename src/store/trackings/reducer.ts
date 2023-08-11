@@ -3,7 +3,7 @@ import { Tracking } from '../../common/enums/trackings/types';
 import { getTrackingDetails } from './actions';
 import { getTodayDate } from '../../helpers/dateHelpers';
 
-interface History {
+export interface History {
   date: string;
   trackingNumber: string;
 }

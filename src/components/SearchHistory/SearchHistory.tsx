@@ -46,19 +46,6 @@ export const SearchHistory: React.FC = () => {
           ))}
         </List>
       )}
-      {/* <List>
-        <Divider />
-        <ListItemButton
-          divider
-          sx={{
-            display: 'flex',
-            justifyContent: 'space-between'
-          }}
-        >
-          <Typography>123456789</Typography>
-          <Typography>24.05.2023</Typography>
-        </ListItemButton>
-      </List> */}
     </Box>
   );
 };
