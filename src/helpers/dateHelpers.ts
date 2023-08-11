@@ -7,9 +7,7 @@ const formatDate = (date: Date) => {
 
 const getTodayDate = () => {
   const today = new Date();
-  const formattedDate = formatDate(today);
-  console.log(formattedDate);
-  return formattedDate;
+  return formatDate(today);
 };
 
 export { getTodayDate };

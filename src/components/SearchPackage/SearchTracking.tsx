@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import {
   IconButton,
   InputAdornment,
@@ -16,6 +16,10 @@ import {
   selectTrackingDetails
 } from '../../store/trackings/selectors';
 import { Loader } from '../Loader/Loader';
+import DateRangeIcon from '@mui/icons-material/DateRange';
+import LocalShippingSharpIcon from '@mui/icons-material/LocalShippingSharp';
+import LocationCityIcon from '@mui/icons-material/LocationCity';
+import PlaceSharpIcon from '@mui/icons-material/PlaceSharp';
 
 const SEARCH_QUERY_VALIDATION_REGEX = /^(59|20)\d{12}$/;
 const SEARCH_QUERY_TEXT_ERROR =
@@ -29,6 +33,10 @@ export const SearchPackage: React.FC = () => {
 
   const isLoading = useAppSelector(selectIsLoading);
   const trackingDetails = useAppSelector(selectTrackingDetails);
+
+  useEffect(() => {
+    setSearchQuery(trackingDetails?.Number || '');
+  }, [trackingDetails]);
 
   const handleFormSubmit = useCallback(
     async (e: React.FormEvent) => {
@@ -47,14 +55,13 @@ export const SearchPackage: React.FC = () => {
     [dispatch, searchQuery]
   );
 
-  if (isLoading) return <Loader />;
-
   return (
     <>
       <form onSubmit={handleFormSubmit}>
         <StyledInput
           label="Номер накладної"
           name="Search input"
+          value={searchQuery}
           fullWidth
           error={isSearchQueryError}
           helperText={isSearchQueryError && SEARCH_QUERY_TEXT_ERROR}
@@ -70,31 +77,40 @@ export const SearchPackage: React.FC = () => {
           }}
         />
       </form>
+      {isLoading && <Loader />}
       {trackingDetails && (
         <Paper elevation={16} sx={{ padding: 2, marginTop: 2 }}>
           <Stack spacing={2}>
-            <Item elevation={12}>
+            <Item elevation={12} sx={{ display: 'flex', alignItems: 'center' }}>
+              <DateRangeIcon sx={{ mr: 1 }} />
               <Typography variant="button" color="white">
                 Створено: {trackingDetails.DateCreated}.
               </Typography>
             </Item>
-            <Item elevation={12}>
+            <Item elevation={12} sx={{ display: 'flex', alignItems: 'center' }}>
+              <LocalShippingSharpIcon sx={{ mr: 1 }} />
               <Typography variant="button" color="white">
                 Статус: {trackingDetails.Status}.
               </Typography>
             </Item>
-            <Item elevation={12}>
+            <Item elevation={12} sx={{ display: 'flex', alignItems: 'center' }}>
+              <LocationCityIcon sx={{ mr: 1 }} />
               <Typography variant="button" color="white">
                 Місто відправник: {trackingDetails.CitySender}.
               </Typography>
             </Item>
-            <Item elevation={12}>
+            <Item elevation={12} sx={{ display: 'flex', alignItems: 'center' }}>
+              <LocationCityIcon sx={{ mr: 1 }} />
               <Typography variant="button" color="white">
                 Місто отримувач: {trackingDetails.CityRecipient}.
               </Typography>
             </Item>
             {trackingDetails.WarehouseRecipient && (
-              <Item elevation={12}>
+              <Item
+                elevation={12}
+                sx={{ display: 'flex', alignItems: 'center' }}
+              >
+                <PlaceSharpIcon sx={{ mr: 1 }} />
                 <Typography variant="button" color="white">
                   Відділення: {trackingDetails.WarehouseRecipient}.
                 </Typography>

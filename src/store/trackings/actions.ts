@@ -1,8 +1,10 @@
+import toast from 'react-hot-toast';
+
+import { createAppAsyncThunk } from '../appAsyncThunk';
 import { ActionType } from '../../common/enums/trackings/actions';
 import { Tracking, CustomError } from '../../common/enums/trackings/types';
 import { trackingResponseMapper } from '../../helpers/serverResponseMapper';
 import { fetchTrackingDetails } from '../../services/api';
-import { createAppAsyncThunk } from '../appAsyncThunk';
 
 const getTrackingDetails = createAppAsyncThunk<
   Tracking,
@@ -11,12 +13,27 @@ const getTrackingDetails = createAppAsyncThunk<
 >(ActionType.GET_TRACKING_DETAILS, async (ttn, { rejectWithValue }) => {
   try {
     const response = await fetchTrackingDetails(ttn);
+
+    if (response.data.data[0].StatusCode === '3')
+      throw { customMessage: 'Номер не знайдено.' };
+
     return trackingResponseMapper(response.data.data[0]);
-  } catch {
+  } catch (error) {
     const message =
-      'An error was received during the request, please try again.';
-    return rejectWithValue({ message });
+      'Під час виконання запиту сталася помилка, будь ласка спробуйте ще.';
+    const errorMessage =
+      error && typeof error === 'object' && 'customMessage' in error
+        ? (error.customMessage as string)
+        : message;
+
+    toast.error(errorMessage);
+    return rejectWithValue({ message: errorMessage });
   }
 });
 
-export { getTrackingDetails };
+const resetTrackingHistory = createAppAsyncThunk(
+  ActionType.RESET_HISTORY,
+  () => {}
+);
+
+export { getTrackingDetails, resetTrackingHistory };
