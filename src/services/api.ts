@@ -13,9 +13,9 @@ const getTrackingRequestOptions = (ttn: string, phone?: string) => ({
   }
 });
 
-const getTrackingDetails = (ttn: string, phone?: string) => {
+const fetchTrackingDetails = (ttn: string, phone?: string) => {
   const options = getTrackingRequestOptions(ttn, phone);
   return axios.post('', options);
 };
 
-export { getTrackingDetails };
+export { fetchTrackingDetails };

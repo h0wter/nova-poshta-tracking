@@ -2,6 +2,7 @@ interface Tracking {
   DateCreated: string;
   Status: string;
   StatusCode: string;
+  Number: string;
 
   CityRecipient?: string;
   CitySender?: string;
@@ -21,4 +22,8 @@ interface OriginalTrackingResponse extends Tracking {
   [key: string]: unknown;
 }
 
-export type { OriginalTrackingResponse, Tracking };
+interface CustomError {
+  message: string;
+}
+
+export type { OriginalTrackingResponse, Tracking, CustomError };
