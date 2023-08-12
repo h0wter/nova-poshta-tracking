@@ -1,27 +1,11 @@
-import { css } from "@emotion/react";
-import "@fontsource/roboto/300.css";
-import "@fontsource/roboto/400.css";
-import "@fontsource/roboto/500.css";
-import "@fontsource/roboto/700.css";
+import { css } from '@emotion/react';
+import '@fontsource/roboto/300.css';
+import '@fontsource/roboto/400.css';
+import '@fontsource/roboto/500.css';
+import '@fontsource/roboto/700.css';
 
 export const GlobalStyles = css`
   :root {
-    --color-white: #ffffff;
-    --color-blue-100: #eef8fb;
-    --color-blue-200: #96daf0;
-    --color-blue-300: #7cbcde;
-    --color-blue-400: #242a3a;
-    --color-gray: #e1e1e1;
-    --overlay-color: rgb(0 0 0 / 30%);
-    --shadow: -1px 4px 74px -16px rgb(0 0 0 / 15%);
-    --font-size-100: 14px;
-    --font-size-200: 16px;
-    --font-size-300: 18px;
-    --font-size-400: 24px;
-    --font-size-500: 32px;
-    --font-size-600: 36px;
-    --container-width: 1000px;
-
     font-family: Roboto, system-ui, Avenir, Helvetica, Arial, sans-serif;
     line-height: 1.5;
     font-weight: 400;
@@ -96,9 +80,9 @@ export const GlobalStyles = css`
   }
 
   button,
-  input[type="button"],
-  input[type="reset"],
-  input[type="submit"] {
+  input[type='button'],
+  input[type='reset'],
+  input[type='submit'] {
     display: block;
     padding: 0;
     margin: 0;
@@ -120,6 +104,8 @@ export const GlobalStyles = css`
   }
 
   #root {
+    display: flex;
+    flex-direction: column;
     min-width: 320px;
     min-height: 100vh;
     margin: 0;
@@ -130,5 +116,13 @@ export const GlobalStyles = css`
     font-style: normal;
     line-height: 1.5;
     text-rendering: optimizespeed;
+
+    background: #141e30;
+    background: -webkit-linear-gradient(to right, #243b55, #141e30);
+    background: linear-gradient(to right, #243b55, #141e30);
+
+    /* background: #1d4350;
+    background: -webkit-linear-gradient(to right, #a43931, #1d4350);
+    background: linear-gradient(to right, #a43931, #1d4350); */
   }
 `;
