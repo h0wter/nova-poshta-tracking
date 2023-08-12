@@ -1,21 +1,27 @@
 import axios from 'axios';
 
-const { VITE_API_URL, VITE_API_KEY } = import.meta.env;
+import {
+  getCitiesRequestOptions,
+  getTrackingRequestOptions,
+  getWarehousesRequestOptions
+} from '../helpers/apiRequestOptions.helper';
+
+const { VITE_API_URL } = import.meta.env;
 
 axios.defaults.baseURL = VITE_API_URL;
 
-const getTrackingRequestOptions = (ttn: string, phone?: string) => ({
-  apiKey: VITE_API_KEY,
-  modelName: 'TrackingDocument',
-  calledMethod: 'getStatusDocuments',
-  methodProperties: {
-    'Documents': [{ 'DocumentNumber': ttn, 'Phone': phone }]
-  }
-});
+const makeRequest = (options: unknown) => axios.post('', options);
 
 const fetchTrackingDetails = (ttn: string, phone?: string) => {
-  const options = getTrackingRequestOptions(ttn, phone);
-  return axios.post('', options);
+  return makeRequest(getTrackingRequestOptions(ttn, phone));
 };
 
-export { fetchTrackingDetails };
+const fetchCities = (query: string) => {
+  return makeRequest(getCitiesRequestOptions(query));
+};
+
+const fetchWarehouses = (city: string) => {
+  return makeRequest(getWarehousesRequestOptions(city));
+};
+
+export { fetchTrackingDetails, fetchCities, fetchWarehouses };
