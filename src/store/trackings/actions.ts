@@ -3,7 +3,7 @@ import toast from 'react-hot-toast';
 import { createAppAsyncThunk } from '../appAsyncThunk';
 import { ActionType } from '../../common/enums/trackings/actions';
 import { Tracking, CustomError } from '../../common/enums/trackings/types';
-import { trackingResponseMapper } from '../../helpers/serverResponseMapper';
+import { trackingResponseMapper } from '../../helpers/serverResponseMapper.helper';
 import { fetchTrackingDetails } from '../../services/api';
 
 const getTrackingDetails = createAppAsyncThunk<

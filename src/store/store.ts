@@ -1,4 +1,4 @@
-import { configureStore } from '@reduxjs/toolkit';
+import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import {
   persistStore,
   persistReducer,
@@ -12,17 +12,22 @@ import {
 import storage from 'redux-persist/lib/storage';
 
 import trackingReducer from './trackings/reducer';
+import officesReducer from './offices/reducer';
 
-const historyPersistConfig = {
-  key: 'tracking',
-  storage,
-  whitelist: ['trackingsHistory']
-};
+const rootReducer = combineReducers({
+  offices: officesReducer,
+  tracking: persistReducer(
+    {
+      key: 'tracking',
+      storage,
+      whitelist: ['trackingsHistory']
+    },
+    trackingReducer
+  )
+});
 
 export const store = configureStore({
-  reducer: {
-    tracking: persistReducer(historyPersistConfig, trackingReducer)
-  },
+  reducer: rootReducer,
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({
       serializableCheck: {

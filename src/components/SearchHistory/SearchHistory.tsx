@@ -1,6 +1,6 @@
 import { Box, Divider, Typography, List, ListItemButton } from '@mui/material';
 
-import { useAppDispatch, useAppSelector } from '../../hooks/storeHooks';
+import { useAppDispatch, useAppSelector } from '../../hooks/useStoreHooks';
 import { selectHistory } from '../../store/trackings/selectors';
 import { useCallback } from 'react';
 import {

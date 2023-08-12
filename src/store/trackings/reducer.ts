@@ -1,7 +1,7 @@
 import { createReducer, isAnyOf } from '@reduxjs/toolkit';
 import { Tracking } from '../../common/enums/trackings/types';
 import { getTrackingDetails, resetTrackingHistory } from './actions';
-import { getTodayDate } from '../../helpers/dateHelpers';
+import { getTodayDate } from '../../helpers/date.helper';
 
 export interface History {
   date: string;

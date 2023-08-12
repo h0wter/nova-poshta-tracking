@@ -11,11 +11,7 @@ const MainPage = lazy(() => import('./pages/Main/MainPage'));
 const OfficesPage = lazy(() => import('./pages/Offices/OfficesPage'));
 
 function App() {
-  const theme = createTheme({
-    palette: {
-      mode: 'dark'
-    }
-  });
+  const theme = createTheme();
   return (
     <ThemeProvider theme={theme}>
       <Routes>
@@ -24,7 +20,7 @@ function App() {
           <Route path="/offices" element={<OfficesPage />} />
         </Route>
       </Routes>
-      <Toaster position="top-right" />
+      <Toaster position="top-center" />
       <Global styles={GlobalStyles} />
     </ThemeProvider>
   );
