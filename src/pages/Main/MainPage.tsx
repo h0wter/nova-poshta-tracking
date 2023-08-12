@@ -1,6 +1,6 @@
 import { Box, Container } from '@mui/material';
 import { SearchHistory } from '../../components/SearchHistory/SearchHistory';
-import { SearchPackage } from '../../components/SearchPackage/SearchTracking';
+import { SearchPackage } from '../../components/SearchTracking/SearchTracking';
 
 const MainPage = () => {
   return (
